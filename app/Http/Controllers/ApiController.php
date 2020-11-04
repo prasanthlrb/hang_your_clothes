@@ -120,8 +120,17 @@ class ApiController extends Controller
         $data = home_slider::orderBy('position','asc')->select('image','title','text')->get();
         return response()->json($data); 
     }
-       public function getApiCategory(){
-         $category = category::select('title_1','image','time','banner','content')->get();
+       public function getApiCategory($id){
+           if($id =='en'){
+
+               $category = category::select('title_1','image','time','banner','content')->get();
+           }else{
+                // $service =DB::table('category as s')
+
+                // ->select('name','image','price_1','price_2')
+                // ->get();
+               $category = category::select('title_1_ar as title_1','image','time_ar as time','banner','content_ar as content')->get();
+           }
          return response()->json($category); 
     }
 
@@ -422,15 +431,25 @@ foreach($agents as $agent){
         return response()->json($data);
     }
 
-    public function service($id){
+    public function service($id,$lang){
         //$service = service::where('cat_id',$id)->select('name','price_1','price_2','image')->get();
-        $service =DB::table('services as s')
-                ->join('items as i', 's.item_id', '=', 'i.id')
-                ->where('s.cat_id',$id)
-                ->select('name','image','price_1','price_2')
-                ->get();
-        //$service = service::where('cat_id',$id)->get();
-        return response()->json($service);
+        if($lang == 'en'){
+            $service =DB::table('services as s')
+                    ->join('items as i', 's.item_id', '=', 'i.id')
+                    ->where('s.cat_id',$id)
+                    ->select('name','image','price_1','price_2')
+                    ->get();
+            //$service = service::where('cat_id',$id)->get();
+            return response()->json($service);
+        }else{
+            $service =DB::table('services as s')
+                    ->join('items as i', 's.item_id', '=', 'i.id')
+                    ->where('s.cat_id',$id)
+                    ->select('name_arabic as name','image','price_1','price_2')
+                    ->get();
+            //$service = service::where('cat_id',$id)->get();
+            return response()->json($service); 
+        }
     }
     public function orderItem($id){
         $order_item = order_item::where('order_id',$id)->select('item_id','qty','total')->get();
@@ -634,7 +653,7 @@ foreach($agents as $agent){
          return response()->json(['message' => 'Delivery Successful',], 200);
     }
 
-    public function addCartItemList($types){
+    public function addCartItemList($types,$lang){
         $items = item::all();
         $output = array();
         foreach($items as $item){
@@ -642,7 +661,7 @@ foreach($agents as $agent){
             if(count($service)>0){
         $data = array(
                 'item_id'=>$item->id,
-                'item_name'=>$item->name,
+                'item_name'=> $lang == "en" ? $item->name : $item->name_arabic,
                 'dryclean_price'=>'-',
                 'wash_price'=>'-',
                 'iron_price'=>'-',
@@ -847,5 +866,21 @@ foreach($agents as $agent){
         $agent->save();
         return response()->json(['message' => 'successfully update',], 200);
     }
+
+    public function checkMobileNumber($id){
+        $data = customer::find($id);
+        if($data->mobile != null || $data->mobile != ''){
+            return response()->json(['message' => 'successfully update',], 200);
+        }else{
+             return response()->json(['message' => 'please enter mobile number',], 400);
+        }
+
+    }
+            public function addMobileNumber(Request $request){
+                $data = customer::find($request->id);
+                $data->mobile = $request->mobile;
+                $data->save();
+                return response()->json(['message' => 'successfully update',], 200);
+            }
 
 }

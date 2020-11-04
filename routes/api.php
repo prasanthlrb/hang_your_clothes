@@ -37,7 +37,7 @@ Route::get('/get-schedule/{id}', 'ApiController@getApiSchedule');
 
 //slider
 Route::get('/get-slider', 'ApiController@getApiSlider');
-Route::get('/get-category', 'ApiController@getApiCategory');
+Route::get('/get-category/{id}', 'ApiController@getApiCategory');
 Route::post('/post-address', 'ApiController@ManageAddress');
 Route::post('/update-profile', 'ApiController@updateCustomer');
 Route::post('/update-address', 'ApiController@updateAddress');
@@ -47,7 +47,7 @@ Route::post('/order', 'ApiController@order');
 Route::get('/get-order/{id}', 'ApiController@getOrder');
 Route::get('/get-order-details/{id}', 'ApiController@getOrderDetails');
 Route::get('/get-address-details/{id}', 'ApiController@getAddressDetails');
-Route::get('/service/{id}', 'ApiController@service');
+Route::get('/service/{id}/{lang}', 'ApiController@service');
 Route::get('/order-item/{id}', 'ApiController@orderItem');
 Route::get('/order-invoice/{id}', 'ApiController@invoiceSendMail');
 //Agent route
@@ -66,7 +66,9 @@ Route::get('/item-order-status/{id}/{payment}', 'ApiController@itemOrderDelivery
 Route::get('/item-delivery/{id}', 'ApiController@itemDelivery');
 
 //Cart function
-Route::get('/item-price-list/{types}', 'ApiController@addCartItemList');
+Route::get('/item-price-lists/{types}/{lang}', 'ApiController@addCartItemList');
+Route::get('/validate-number/{id}', 'ApiController@checkMobileNumber');
+Route::post('/enter-number', 'ApiController@addMobileNumber');
 Route::get('/item-price-list/{types}/{id}', 'ApiController@addCartItemListAgent');
 
 
