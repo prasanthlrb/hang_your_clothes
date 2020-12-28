@@ -15,6 +15,7 @@
         "laravel/passport": "^7.5",
         "laravel/tinker": "^1.0",
         "mobiledetect/mobiledetectlib": "^2.8",
+        "spatie/laravel-backup": "^6.11",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {

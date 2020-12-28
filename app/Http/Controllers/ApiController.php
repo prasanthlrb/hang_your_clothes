@@ -37,6 +37,7 @@ class ApiController extends Controller
             $customer->name = $request->name;
             $customer->email = $request->email;
             $customer->mobile = $request->mobile;
+            $customer->fcm_token = $request->fcm_token;
             $customer->token_id = $randomid;
             $customer->password = Hash::make($request->password);
             $customer->save();
@@ -55,18 +56,21 @@ class ApiController extends Controller
     public function customerLogin(Request $request){
         $exist = customer::where('email',$request->email)->get();
         if(count($exist)>0){
-                if(Hash::check($request->password,$exist[0]->password)){
-                    return response()->json(['message' => 'Login Successfully','customer_name'=>$exist[0]->name,
-                'customer_email'=>$exist[0]->email,
-                'customer_mobile'=>$exist[0]->mobile,
-                'customer_id'=>$exist[0]->id,'status'=>200], 200);
-                }else{
+            if(Hash::check($request->password,$exist[0]->password)){
 
-                    return response()->json(['message' => 'Records Does not Match','status'=>403], 403);
-                }
+                $exist[0]->fcm_token = $request->fcm_token;
+                $exist[0]->save();
+
+                return response()->json(['message' => 'Login Successfully','customer_name'=>$exist[0]->name,
+            'customer_email'=>$exist[0]->email,
+            'customer_mobile'=>$exist[0]->mobile,
+            'customer_id'=>$exist[0]->id,'status'=>200], 200);
             }else{
-                return response()->json(['message' => 'this Email Address Not Registered','status'=>403], 403);
+                return response()->json(['message' => 'Records Does not Match','status'=>403], 403);
             }
+        }else{
+            return response()->json(['message' => 'this Email Address Not Registered','status'=>403], 403);
+        }
     }
 
        public function forgetPassword(Request $request){
@@ -116,11 +120,12 @@ class ApiController extends Controller
         }
                 
     }
-     public function getApiSlider(){
+    public function getApiSlider(){
         $data = home_slider::orderBy('position','asc')->select('image','title','text')->get();
         return response()->json($data); 
     }
-       public function getApiCategory($id){
+    
+    public function getApiCategory($id){
            if($id =='en'){
 
                $category = category::select('title_1','image','time','banner','content')->get();
@@ -329,6 +334,7 @@ class ApiController extends Controller
     }
 
     public function order(Request $request){
+        return response()->json(['message' => 'Sorry Your Order Not Process'], 400);
         $order = new order;
         $order->date = date('Y-m-d');
         $order->customer_id = $request->customer_id;
@@ -369,6 +375,7 @@ class ApiController extends Controller
 }
         return response()->json(['message' => 'Order Placed Successfully','order_id'=>$order->id], 200);
     }
+    
     public function sendNotification(){
 $agents = agent::where('fcm_token','!=',null)->get();
 foreach($agents as $agent){

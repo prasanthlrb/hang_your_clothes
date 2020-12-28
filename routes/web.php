@@ -165,7 +165,7 @@ Route::POST('/update-notification', 'NotificationController@updateNotification')
 Route::get('/notification/{id}', 'NotificationController@editNotification');
 Route::get('/push-notification', 'NotificationController@Notification');
 Route::get('/notification-delete/{id}', 'NotificationController@deleteNotification');
-
+Route::get('/get_notification_user/{id}','NotificationController@get_notification_user');
 //city
 	// Route::POST('/save-city', 'AreaController@saveCity');
 	// Route::POST('/update-city', 'AreaController@updateCity');
@@ -187,5 +187,12 @@ Route::get('/notification-delete/{id}', 'NotificationController@deleteNotificati
 
 Route::get('get-item', 'AutoCompleteController@getItem');
 Route::get('get-item/{id}', 'AutoCompleteController@getItemID');
+
+
+//backup routes
+Route::get('backup', 'BackupController@index');
+Route::get('backup/create', 'BackupController@create');
+Route::get('backup/download/{file_name}', 'BackupController@download');
+Route::get('backup/delete/{file_name}', 'BackupController@delete');
 
 Auth::routes();

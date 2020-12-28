@@ -4,7 +4,12 @@
   <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/tables/datatable/datatables.min.css">
   <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/tables/extensions/buttons.dataTables.min.css">
   <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css">
-  
+  <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/forms/selects/select2.min.css">
+  <style>
+  .select2-container--default .select2-selection--multiple {
+    width: 100% !important;
+  }
+  </style>
 @endsection
 @section('section')
 <div class="content-wrapper">
@@ -113,6 +118,29 @@
               </textarea>
             </div>
           </div>
+
+          <div class="form-group row">
+            <label class="col-md-3 label-control" for="userinput5">User Type</label>
+            <div class="col-md-9">
+              <select onchange="usertype()" id="user_type" name="user_type" class="form-control">
+                <option value="0" selected="" >All</option>
+                <option value="1">Selected User</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row" id="usershow">
+            <label class="col-md-3 label-control" for="userinput3">Select the User</label>
+            <div class="col-md-9">
+              <select style="width:100% !imporatnt;" id="user_id" name="user_id[]" class="select2 form-control" multiple="multiple">
+                <optgroup label="Select service">
+                @foreach ($user as $user1)
+                  <option value="{{$user1->id}}">{{$user1->email}}</option>
+                @endforeach
+                </optgroup>
+              </select>
+            </div>
+          </div>
           
          
         </div>
@@ -140,8 +168,11 @@
   <script src="../../../app-assets/vendors/js/tables/buttons.colVis.min.js" type="text/javascript"></script>
   <script src="../../../app-assets/js/scripts/tables/datatables-extensions/datatable-button/datatable-html5.js"
   type="text/javascript"></script>
+  <script src="../../../app-assets/vendors/js/forms/select/select2.full.min.js" type="text/javascript"></script>
+<script src="../../../app-assets/js/scripts/forms/select/form-select2.js" type="text/javascript"></script>
 
 <script>
+$("#usershow").hide();
   var action_type;
   $('#open_model').click(function(){
     $('#user_model').modal('show');
@@ -149,6 +180,16 @@
     $('#saveButton').text('Save');
     $('#myModalLabel8').text('Create Notification');
   })
+
+function usertype(){
+  var user_type = $("#user_type").val();
+  if(user_type == '1'){
+    $("#usershow").show();
+  }
+  else{
+    $("#usershow").hide();
+  }
+}
     function Save(){
       var formData = new FormData($('#user_form')[0]);
       if(action_type == 1){
@@ -224,11 +265,33 @@
           $('input[name=title]').val(data.title);
           $('textarea[name=description]').val(data.description);
           $('input[name=id]').val(data.id);
+
+ if(data.user_type == 1){
+    $("#usershow").show();
+    get_notification_user(data.id);
+  }
+  else{
+    $("#usershow").hide();
+  }
+
           $('#user_model').modal('show');
           action_type = 2;
         }
       });
     }
+
+function get_notification_user(id)
+{
+    $.ajax({
+        url : '/get_notification_user/'+id,
+        type: "GET",
+        success: function(data)
+        {
+           $('#user_id').html(data);
+        }
+   });
+}
+
      function Delete(id){
       var r = confirm("Are you sure");
       if (r == true) {

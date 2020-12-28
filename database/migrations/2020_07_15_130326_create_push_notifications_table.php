@@ -17,6 +17,8 @@ class CreatePushNotificationsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title')->nullable();
             $table->string('description')->nullable();
+            $table->string('user_type')->nullable();
+            $table->string('user_id')->nullable();
             $table->string('status')->default('0');
             $table->timestamps();
         });

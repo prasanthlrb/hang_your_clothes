@@ -137,6 +137,7 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
                 <li class="nav-item"><a href="/role"><span class="menu-title">Roles</span></a></li>
                 @endif
                 <li class="nav-item"><a href="/settings"><span class="menu-title">Settings</span></a></li>
+                <li class="nav-item"><a href="/backup"><span class="menu-title">DB Backup</span></a></li>
               </ul>
             </li>
 

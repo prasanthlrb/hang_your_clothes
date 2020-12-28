@@ -21,6 +21,7 @@ class CreateCustomersTable extends Migration
             $table->string('password');
             $table->string('token_id')->nullable();
             $table->string('unique_id')->nullable();
+            $table->string('fcm_token')->nullable();
             $table->timestamps();
         });
     }
