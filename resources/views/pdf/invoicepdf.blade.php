@@ -26,7 +26,7 @@
                     <h2 style="font-weight:bold; font-size: 32px; color: #2d87ba; max-width: 85%; line-height: 1.1; margin: 10px 0 0; padding: 0; float: left">Invoice</h2>
                   </div>
                   <div style="color:black; text-align: right; padding-top:40px; padding-right: 40px; float: right;">
-                      <img style="width: 100px;height: 100px;" src="upload_image/{{$settings->logo}}">
+                      <img style="width: 100px;height: 100px;" src="image/logo-png.png">
                     <!--<span style="color:black;font-weight:bold;">-->
                     <!--  <b>{{$settings->name}}</b><br>-->
                     <!--</span>-->
