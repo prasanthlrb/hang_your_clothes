@@ -338,9 +338,9 @@ class OrderController extends Controller
 
         try{
             Mail::send('mail.invoice', compact('order','order_item','customer','item','settings','address'), function($message)use($order,$customer,$pdf) {
-            $message->to($customer->email)->subject('Hang Your Cloths Invoice ID : #'.$order->id);
-            $message->from('sales@hangyourcloths.com','Hang Your Cloths');
-            $message->attachData($pdf->output(), 'hang_your_cloths_invoice_'.$order->id.'.pdf');
+            $message->to($customer->email)->subject('U Clean Invoice ID : #'.$order->id);
+            $message->from('sales@hangyourcloths.com','U Clean');
+            $message->attachData($pdf->output(), 'u_clean_invoice_'.$order->id.'.pdf');
             });
         }catch(JWTException $exception){
             $this->serverstatuscode = "0";

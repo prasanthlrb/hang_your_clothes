@@ -105,7 +105,7 @@
           <div class="col-12 col-sm-9 col-xl-10">
             <div class="media-body">
               <ul class="ml-2 px-0 list-unstyled">
-                <li class="text-bold-800">Hang Your Clothes</li>
+                <li class="text-bold-800">U Clean</li>
                 <li>12 Al Athmar St,</li>
                 <li>Abu Dhabi,</li>
                 <li>UAE</li>

@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="author" content="PIXINVENT">
-  <title>Hang Your Clothes</title>
+  <title>U Clean</title>
   <link rel="shortcut icon" type="image/x-icon" href="/images/fav_icon.png">
 
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"
@@ -48,7 +48,7 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
           <li class="nav-item mr-auto">
             <a class="navbar-brand" href="/">
               <img class="brand-logo" alt="Msupply" src="{{ asset('image/logo-png.png')}}">
-              <p class="brand-text"> Hang Your Clothes</p>
+              <p class="brand-text"> U Clean</p>
             </a>
           </li>
           <li class="nav-item d-none d-md-block float-right"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="toggle-icon ft-toggle-right font-medium-3 white" data-ticon="ft-toggle-right"></i></a></li>

@@ -334,7 +334,7 @@ class ApiController extends Controller
     }
 
     public function order(Request $request){
-        return response()->json(['message' => 'Sorry Your Order Not Process'], 400);
+        //return response()->json(['message' => 'Sorry Your Order Not Process'], 400);
         $order = new order;
         $order->date = date('Y-m-d');
         $order->customer_id = $request->customer_id;
@@ -847,9 +847,9 @@ foreach($agents as $agent){
 
         try{
             Mail::send('mail.invoice', compact('order','order_item','customer','item','settings','address'), function($message)use($order,$customer,$pdf) {
-            $message->to($customer->email)->subject('Hang Your Cloths Invoice ID : #'.$order->id);
-            $message->from('prasanthats@gmail.com','Hang Your Cloths');
-            $message->attachData($pdf->output(), 'hang_your_cloths_invoice_'.$order->id.'.pdf');
+            $message->to($customer->email)->subject('U Clean ID : #'.$order->id);
+            $message->from('prasanthats@gmail.com','U Clean');
+            $message->attachData($pdf->output(), 'u_clean_invoice_'.$order->id.'.pdf');
             });
         }catch(JWTException $exception){
             $this->serverstatuscode = "0";

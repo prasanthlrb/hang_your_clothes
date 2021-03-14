@@ -8,7 +8,7 @@
   <meta name="description" content="Modern admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities with bitcoin dashboard.">
   <meta name="keywords" content="admin template, modern admin template, dashboard template, flat admin template, responsive admin template, web app, crypto dashboard, bitcoin dashboard">
   <meta name="author" content="PIXINVENT">
-  <title>Hang Your Clothes - Login</title>
+  <title>U Clean - Login</title>
   <link rel="shortcut icon" type="image/x-icon" href="/images/fav_icon.png">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"
   rel="stylesheet">
@@ -50,7 +50,7 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
                     </div>
                   </div>
                   <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
-                    <span>Login with Hang Your Clothes</span>
+                    <span>Login with U Clean</span>
                   </h6>
                 </div>
                 <div class="card-content">
